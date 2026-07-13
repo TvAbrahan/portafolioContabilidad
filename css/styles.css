@@ -1,0 +1,738 @@
+/* ========================================
+   1. COLORES Y CONFIGURACIÓN GENERAL
+   Cambia estos valores para modificar toda la paleta.
+   ======================================== */
+:root {
+  --ink: #071d31;
+  --blue: #135b7a;
+  --cyan: #67d6d0;
+  --cream: #f8f4ec;
+  --paper: #fffdf9;
+  --muted: #557084;
+  --line: #c8d5d8;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, Arial, sans-serif;
+  background: var(--ink);
+  color: var(--ink);
+}
+
+/* ========================================
+   2. ESTRUCTURA DE LAS DIAPOSITIVAS
+   ======================================== */
+.slide {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100svh;
+  padding: 28px clamp(22px, 5vw, 80px);
+  overflow: hidden;
+  scroll-snap-align: start;
+}
+
+/* Círculo decorativo en el fondo */
+.slide::after {
+  position: absolute;
+  right: -16%;
+  bottom: -38%;
+  width: min(45vw, 600px);
+  aspect-ratio: 1;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  opacity: 0.12;
+  pointer-events: none;
+  content: "";
+}
+
+/* Colores de fondo disponibles para cada diapositiva */
+.light {
+  color: var(--ink);
+  background: var(--cream);
+}
+
+.dark {
+  color: white;
+  background: var(--ink);
+}
+
+.blue {
+  color: white;
+  background: var(--blue);
+}
+
+/* Cabecera y pie de cada diapositiva */
+.top,
+.footer {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.top {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.top a,
+.footer a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.top .section {
+  opacity: 0.68;
+}
+
+.footer {
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.footer a {
+  opacity: 0.78;
+}
+
+/* Zona central de contenido */
+.content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: min(1120px, 100%);
+  margin: auto;
+}
+
+/* ========================================
+   3. TIPOGRAFÍA GENERAL
+   ======================================== */
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+h1,
+h2 {
+  letter-spacing: -0.06em;
+  line-height: 0.93;
+}
+
+h1 {
+  max-width: 930px;
+  margin-bottom: 28px;
+  font-size: clamp(3.4rem, 9vw, 8.6rem);
+}
+
+h2 {
+  max-width: 860px;
+  margin-bottom: 25px;
+  font-size: clamp(2.7rem, 6.2vw, 6.1rem);
+}
+
+h3 {
+  font-size: 1.05rem;
+  line-height: 1.2;
+}
+
+.eyebrow {
+  margin: 0 0 17px;
+  color: var(--cyan);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.light .eyebrow {
+  color: var(--blue);
+}
+
+/* Fondo del mapa mental: la imagen está en assets/img/ */
+.principles-slide {
+  background-image:
+    linear-gradient(rgba(19, 91, 122, 0.9), rgba(7, 29, 49, 0.91)),
+    url("../assets/img/Captura de pantalla 2026-07-12 192504.png");
+  background-position: center;
+  background-size: cover;
+}
+
+.principles-layout {
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  align-items: end;
+  gap: clamp(28px, 7vw, 100px);
+}
+
+.principles-title {
+  max-width: 720px;
+}
+
+.principles-note {
+  padding: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(7, 29, 49, 0.58);
+  backdrop-filter: blur(8px);
+}
+
+.principles-note span {
+  color: var(--cyan);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.principles-note p {
+  margin: 16px 0 0;
+  font-family: Georgia, serif;
+  font-size: 1.35rem;
+  line-height: 1.25;
+}
+
+.intro {
+  max-width: 650px;
+  color: inherit;
+  font-size: clamp(1.05rem, 1.7vw, 1.32rem);
+  line-height: 1.55;
+  opacity: 0.78;
+}
+
+/* ========================================
+   4. PORTADA
+   ======================================== */
+.cover-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 0.7fr;
+  align-items: end;
+  gap: 45px;
+}
+
+.name {
+  margin-top: 34px;
+  padding-left: 18px;
+  color: #d6e8ee;
+  border-left: 2px solid var(--cyan);
+}
+
+.name strong {
+  display: block;
+  color: #fff;
+  font-size: 1.2rem;
+}
+
+.chapter {
+  align-self: end;
+  padding: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+}
+
+.chapter b {
+  display: block;
+  color: var(--cyan);
+  font-size: 4.6rem;
+  letter-spacing: -0.08em;
+  line-height: 0.8;
+}
+
+.chapter p {
+  margin: 18px 0 0;
+  color: #dcecf0;
+  line-height: 1.35;
+}
+
+/* ========================================
+   5. DIAPOSITIVAS CON TARJETAS
+   ======================================== */
+.four {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  margin-top: 15px;
+  border: 1px solid var(--line);
+  background: var(--line);
+}
+
+.four article {
+  min-height: 190px;
+  padding: 25px 20px;
+  background: var(--paper);
+}
+
+.four span {
+  display: block;
+  margin-bottom: 40px;
+  color: var(--blue);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.card {
+  min-height: 230px;
+  padding: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+}
+
+.card .num {
+  color: var(--cyan);
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: -0.06em;
+}
+
+.card p {
+  color: #d3e4e9;
+  line-height: 1.45;
+}
+
+/* ========================================
+   6. DIAPOSITIVA DE PRINCIPIOS Y CICLO
+   ======================================== */
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: clamp(30px, 8vw, 130px);
+}
+
+.statement {
+  margin: 0;
+  font-family: Georgia, serif;
+  font-size: clamp(1.55rem, 3vw, 3.3rem);
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--line);
+  list-style: none;
+}
+
+.list li {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+  font-weight: 700;
+}
+
+.list li::before {
+  margin-right: 12px;
+  color: var(--cyan);
+  content: "—";
+}
+
+.ledger {
+  max-width: 510px;
+  margin: auto;
+  padding: clamp(24px, 4vw, 52px);
+  color: var(--ink);
+  background: var(--paper);
+  box-shadow: 16px 16px 0 rgba(103, 214, 208, 0.32);
+  transform: rotate(-1.6deg);
+}
+
+.ledger header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--ink);
+  font-family: Georgia, serif;
+  font-size: 1.2rem;
+}
+
+.ledger div {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #ccd6d9;
+}
+
+.ledger div:last-child {
+  font-weight: 800;
+}
+
+/* Etapas del ciclo contable: diario, mayor y balance */
+.cycle-layout {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  align-items: center;
+  gap: clamp(30px, 7vw, 100px);
+}
+
+.cycle-stages {
+  display: grid;
+  gap: 10px;
+}
+
+.cycle-stage {
+  display: grid;
+  grid-template-columns: 54px 1fr;
+  column-gap: 16px;
+  padding: 18px;
+  border-left: 3px solid var(--cyan);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.cycle-stage span {
+  grid-row: span 2;
+  color: var(--cyan);
+  font-size: 1.8rem;
+  font-weight: 800;
+}
+
+.cycle-stage h3 {
+  margin: 0 0 5px;
+}
+
+.cycle-stage p {
+  margin: 0;
+  color: #dcebf0;
+  line-height: 1.35;
+}
+
+/* ========================================
+   7. CATÁLOGO DE CUENTAS
+   ======================================== */
+.account-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.account {
+  padding: 22px;
+  border-top: 5px solid var(--cyan);
+  background: var(--paper);
+}
+
+.account b {
+  font-size: 1.15rem;
+}
+
+.account p {
+  margin: 9px 0 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+/* Centra la última tarjeta en la fila final */
+.account:last-child {
+  grid-column: 2 / 3;
+}
+
+/* En esta diapositiva se usan seis tarjetas, por eso la última vuelve a la cuadrícula normal. */
+#cuentas .account:last-child {
+  grid-column: auto;
+}
+
+.account-summary {
+  margin-top: 16px;
+  padding: 16px 20px;
+  color: var(--blue);
+  border-left: 4px solid var(--cyan);
+  background: #e6f0ef;
+  line-height: 1.45;
+}
+
+/* ========================================
+   8. PARCIALES E IMÁGENES
+   ======================================== */
+.evidence {
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:30px;
+    margin-top:30px;
+}
+
+.evidence-card {
+    background:#fff;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 12px 30px rgba(0,0,0,.15);
+    display:flex;
+    flex-direction:column;
+}
+
+.evidence-card header {
+    background:#2563eb;
+    color:#fff;
+    padding:16px 20px;
+}
+
+.evidence-card h3 {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+.evidence-card small {
+     opacity:.9;
+}
+
+.document-viewer{
+    width:100%;
+    height:600px;
+    border:none;
+    background:#fff;
+}
+
+.image-frame {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 600px;
+  overflow: auto;
+  border: 2px dashed #8aa3ad;
+  background: #eef3f3;
+}
+
+
+/* La imagen ocupa todo el espacio cuando se agrega a assets/ */
+.image-frame img {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Antes era cover */
+  background: white;
+}
+
+.image-frame strong {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--blue);
+}
+
+/* ========================================
+   9. PLANILLA Y CIERRE
+   ======================================== */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  margin-top: 30px;
+}
+
+.steps article {
+  min-height: 190px;
+  padding: 22px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.steps b {
+  display: block;
+  margin-bottom: 35px;
+  color: var(--cyan);
+  font-size: 2rem;
+}
+
+.final {
+  align-items: center;
+  text-align: center;
+}
+
+.final .content {
+  align-items: center;
+}
+
+.final h2 {
+  max-width: 950px;
+}
+
+.final p {
+  max-width: 590px;
+  color: #dcebf0;
+}
+
+/* Composición visual de las imágenes de agradecimiento del cierre */
+.final-content {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+  gap: clamp(24px, 6vw, 80px);
+  text-align: left;
+}
+
+.final-copy {
+  max-width: 650px;
+}
+
+.thanks-images {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.35fr 0.65fr;
+  align-items: end;
+  gap: 12px;
+  padding: 30px 0 0 24px;
+}
+
+.thanks-images > p {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0;
+  color: var(--cyan);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.thanks-image {
+  margin: 0;
+  padding: 7px;
+  background: var(--paper);
+  box-shadow: 10px 10px 0 rgba(7, 29, 49, 0.22);
+}
+
+.thanks-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.thanks-image-wide {
+  height: 190px;
+  transform: rotate(-2deg);
+}
+
+.thanks-image-tall {
+  height: 155px;
+  transform: translateY(14px) rotate(3deg);
+}
+
+/* ========================================
+   10. PUNTOS DE NAVEGACIÓN LATERAL
+   ======================================== */
+.dots {
+  position: fixed;
+  z-index: 10;
+  top: 50%;
+  right: 18px;
+  display: grid;
+  gap: 9px;
+  transform: translateY(-50%);
+}
+
+.dots a {
+  width: 9px;
+  height: 9px;
+  border: 1px solid white;
+  border-radius: 50%;
+  opacity: 0.72;
+}
+
+.dots a:first-child,
+.dots a.active {
+  background: #fff;
+}
+
+/* ========================================
+   11. VISTA EN CELULAR
+   ======================================== */
+@media (max-width: 760px) {
+  html {
+    scroll-snap-type: none;
+  }
+
+  .slide {
+    min-height: auto;
+    padding: 22px 20px;
+  }
+
+  .content {
+    padding: 55px 0;
+  }
+
+  .cover-grid,
+  .split,
+  .evidence,
+  .principles-layout,
+  .cycle-layout,
+  .final-content {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .thanks-images {
+    width: min(360px, 100%);
+    margin: auto;
+  }
+
+  .chapter {
+    max-width: 250px;
+  }
+
+  .four,
+  .cards,
+  .account-grid,
+  .steps {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .four article {
+    min-height: 135px;
+  }
+
+  .four span {
+    margin-bottom: 20px;
+  }
+
+  .account:last-child {
+    grid-column: auto;
+  }
+
+  .dots {
+    display: none;
+  }
+
+  .footer {
+    font-size: 0.72rem;
+  }
+
+  .statement {
+    font-size: 1.75rem;
+  }
+}
+
+/* Celulares angostos */
+@media (max-width: 420px) {
+  .four,
+  .cards,
+  .account-grid,
+  .steps {
+    grid-template-columns: 1fr;
+  }
+
+  h1 {
+    font-size: 3.2rem;
+  }
+}
