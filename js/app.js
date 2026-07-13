@@ -16,3 +16,17 @@ slides.forEach((slide) => observer.observe(slide));
 document.querySelectorAll('.image-frame img').forEach((image) => {
   image.addEventListener('error', () => image.style.display = 'none');
 });
+
+// Anima las tarjetas de evidencia (Parcial 1 y Parcial 2) cuando entran en pantalla.
+const evidenceCards = [...document.querySelectorAll('.evidence-card')];
+if (evidenceCards.length) {
+  const evidenceObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('is-visible');
+      evidenceObserver.unobserve(entry.target);
+    });
+  }, { threshold: 0.2 });
+
+  evidenceCards.forEach((card) => evidenceObserver.observe(card));
+}

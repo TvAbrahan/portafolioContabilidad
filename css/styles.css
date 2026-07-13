@@ -530,6 +530,57 @@ h3 {
   color: var(--blue);
 }
 
+/* Animación de aparición al hacer scroll (tarjetas de evidencia) */
+.evidence-card {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.evidence-card.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.evidence-card:nth-child(2).is-visible {
+  transition-delay: 0.15s;
+}
+
+.image-frame img {
+  transition: transform 0.4s ease;
+}
+
+.evidence-card.is-visible .image-frame img {
+  animation: evidence-pop 0.6s ease 0.2s backwards;
+}
+
+@keyframes evidence-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (hover: hover) {
+  .image-frame:hover img {
+    transform: scale(1.03);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .evidence-card,
+  .evidence-card.is-visible .image-frame img {
+    animation: none;
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
 /* ========================================
    9. PLANILLA Y CIERRE
    ======================================== */
